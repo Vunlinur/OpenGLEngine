@@ -11,6 +11,7 @@
 #include "IndexBuffer.h"
 #include "VertexArray.h"
 #include "Shader.h"
+#include "Texture.h"
 
 int main(void)
 {
@@ -41,33 +42,40 @@ int main(void)
 	else
 		std::cout << "[ERROR] GLEW init failed!" << std::endl;
 
-	const int floatpos = 6;
 	float positions[] = {
-		-1.0, -1.0, //0
-		 1.0, -1.0, //1
-		 1.0,  1.0, //2
-		-1.0,  1.0  //3
+		-1.0, -1.0, 0.0, 0.0,//0
+		 1.0, -1.0, 1.0, 0.0,//1
+		 1.0,  1.0, 1.0, 1.0,//2
+		-1.0,  1.0, 0.0, 1.0//3
 	};
 
 	unsigned int indices[] = {
 		0, 1, 2,
 		2, 3, 0
 	};
+
+	glCall(glEnable(GL_BLEND));
+	glCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 	
-	VertexBuffer vertexBuffer(positions, sizeof(positions) * sizeof(float));
+	VertexBuffer vertexBuffer(positions, sizeof(positions)*8); // *8 for debug
 	VertexBufferLayout layout;
+	layout.Push<float>(2);
 	layout.Push<float>(2);
 
 	VertexArray vertexArray;
 	vertexArray.AddBuffer(vertexBuffer, layout);
 	IndexBuffer indexBuffer(indices, 6);
 	
-	Shader shader("src/Shader.shader");
+	Shader shader("src/resources/Shader.shader");
 	shader.Bind();
+	float time = 0.0; // Uniform
+
+	Texture texture("src/resources/stoneTexture.jpg");
+	int textureSlot = 0;
+	texture.Bind(textureSlot);
+	shader.SetUniform1i("u_Texture", textureSlot);
 
 	Renderer renderer;
-	
-	float time = 0.0; // Uniform
 
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))

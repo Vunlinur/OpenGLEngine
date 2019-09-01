@@ -1,4 +1,4 @@
-#include "renderer.h"
+#include "Renderer.h"
 #include <iostream>
 
 void glClearError()
@@ -10,7 +10,7 @@ bool glLogCall(const char* function, const char* file, int line) //wrap a functi
 {
 	while (GLenum error = glGetError())
 	{
-		std::cout << "[OpenGL error " << error << "]: " << function << " " << file << ":" << line;
+		std::cout << "[OpenGL error " << error << "]: In function: " << function << ", file: " << file << ":" << line << std::endl;
 		return false;
 	}
 	return true;
