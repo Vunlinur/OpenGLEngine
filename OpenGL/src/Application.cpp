@@ -64,21 +64,20 @@ int main(void)
 	
 	Shader shader("src/Shader.shader");
 	shader.Bind();
+
+	Renderer renderer;
 	
 	float time = 0.0; // Uniform
 
-	//va.Unbind();
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))
 	{
 		/* Render here */
-		glClear(GL_COLOR_BUFFER_BIT);
+		renderer.Clear();
 
-		shader.Bind();
 		glCall(shader.SetUnifrom1f("u_Time", time));
 
-		vertexArray.Bind();
-		indexBuffer.Bind();
+		renderer.Draw(vertexArray, indexBuffer, shader);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 
 		time = time + (float)0.01;

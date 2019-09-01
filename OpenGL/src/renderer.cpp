@@ -23,3 +23,8 @@ void Renderer::Draw(const VertexArray& vertexArray, const IndexBuffer& indexBuff
 	indexBuffer.Bind();
 	glDrawElements(GL_TRIANGLES, indexBuffer.GetCount(), GL_UNSIGNED_INT, nullptr);
 }
+
+void Renderer::Clear() const
+{
+	glCall(glClear(GL_COLOR_BUFFER_BIT));
+}
