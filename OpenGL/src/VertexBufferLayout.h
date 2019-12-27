@@ -28,7 +28,7 @@ private:
 	unsigned int m_Stride;
 public:
 	VertexBufferLayout()
-		: m_Stride(0) {}
+		: m_Stride(0) {} //set to 0 at first
 
 	template<typename T>
 	void Push(unsigned int count)

@@ -47,10 +47,10 @@ int main(void)
 		std::cout << "[ERROR] GLEW init failed!" << std::endl;
 
 	float positions[] = {
-		-1.0, -1.0, 0.0, 0.0,//0
-		 1.0, -1.0, 1.0, 0.0,//1
-		 1.0,  1.0, 1.0, 1.0,//2
-		-1.0,  1.0, 0.0, 1.0//3
+		-0.5, -0.5, 0.0, 0.0,//0
+		 0.5, -0.5, 1.0, 0.0,//1
+		 0.5,  0.5, 1.0, 1.0,//2
+		-0.5,  0.5, 0.0, 1.0//3
 	};
 
 	unsigned int indices[] = {
@@ -63,8 +63,8 @@ int main(void)
 	
 	VertexBuffer vertexBuffer(positions, sizeof(positions));
 	VertexBufferLayout layout;
-	layout.Push<float>(2); // 2 
-	layout.Push<float>(2);
+	layout.Push<float>(2); // 1st and 2nd columns of POSITIONS: vertex coords
+	layout.Push<float>(2); // 3rd and 4th columns of POSITIONS: texture coords
 
 	VertexArray vertexArray;
 	vertexArray.AddBuffer(vertexBuffer, layout);
