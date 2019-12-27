@@ -29,7 +29,8 @@ int main(void)
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	/* Create a windowed mode window and its OpenGL context */
-	window = glfwCreateWindow(1920, 1080, "OpenGL", NULL, NULL);
+	int resolutionX = 1920, resolutionY = 1080;
+	window = glfwCreateWindow(resolutionX, resolutionY, "OpenGL", NULL, NULL);
 	if (!window)
 	{
 		glfwTerminate();
@@ -60,14 +61,18 @@ int main(void)
 	glCall(glEnable(GL_BLEND));
 	glCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 	
-	VertexBuffer vertexBuffer(positions, sizeof(positions)*8); // *8 for debug
+	VertexBuffer vertexBuffer(positions, sizeof(positions));
 	VertexBufferLayout layout;
-	layout.Push<float>(2);
+	layout.Push<float>(2); // 2 
 	layout.Push<float>(2);
 
 	VertexArray vertexArray;
 	vertexArray.AddBuffer(vertexBuffer, layout);
 	IndexBuffer indexBuffer(indices, 6);
+
+	float diagonal = sqrt(resolutionX * resolutionX + resolutionY * resolutionY);
+	diagonal /= 2;
+	glm::mat4 projectionMatrix = glm::ortho(-resolutionX / diagonal, resolutionX / diagonal, -resolutionY / diagonal, resolutionY / diagonal);
 	
 	Shader shader("resources/Shader.shader");
 	shader.Bind();
@@ -77,6 +82,7 @@ int main(void)
 	int textureSlot = 0;
 	texture.Bind(textureSlot);
 	shader.SetUniform1i("u_Texture", textureSlot);
+	shader.SetUniformMat4f("u_ModelViewProjectionMatrix", projectionMatrix);
 
 	Renderer renderer;
 
@@ -86,7 +92,7 @@ int main(void)
 		/* Render here */
 		renderer.Clear();
 
-		glCall(shader.SetUnifrom1f("u_Time", time));
+		shader.SetUniform1f("u_Time", time);
 
 		renderer.Draw(vertexArray, indexBuffer, shader);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
