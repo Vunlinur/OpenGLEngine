@@ -1,6 +1,9 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -66,11 +69,11 @@ int main(void)
 	vertexArray.AddBuffer(vertexBuffer, layout);
 	IndexBuffer indexBuffer(indices, 6);
 	
-	Shader shader("src/resources/Shader.shader");
+	Shader shader("resources/Shader.shader");
 	shader.Bind();
 	float time = 0.0; // Uniform
 
-	Texture texture("src/resources/stoneTexture.jpg");
+	Texture texture("resources/dragonAlpha.png");
 	int textureSlot = 0;
 	texture.Bind(textureSlot);
 	shader.SetUniform1i("u_Texture", textureSlot);
