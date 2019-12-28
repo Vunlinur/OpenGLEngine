@@ -78,9 +78,10 @@ int main(void)
 	IndexBuffer indexBuffer(indices, 6);
 
 	/* Model View Projection matrices */
+	glm::vec3 viewTranslation = glm::vec3(500, 250, 0);
 	glm::mat4 projectionMatrix = glm::ortho( 0.0f, (float)resolutionX, 0.0f, (float)resolutionY);
-	glm::mat4 viewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(500, 250, 0));
-	glm::mat4 modelMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(250, 250, 0));
+	glm::mat4 viewMatrix = glm::translate(glm::mat4(1.0f), viewTranslation);
+	glm::mat4 modelMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
 
 	glm::mat4 mvp = projectionMatrix * viewMatrix * modelMatrix;
 	
@@ -93,7 +94,6 @@ int main(void)
 	int textureSlot = 0;
 	texture.Bind(textureSlot);
 	shader.SetUniform1i("u_Texture", textureSlot);
-	shader.SetUniformMat4f("u_ModelViewProjectionMatrix", mvp);
 
 	Renderer renderer;
 
@@ -103,14 +103,14 @@ int main(void)
 	ImGui_ImplOpenGL3_Init(glsl_version);
 	ImGui::StyleColorsDark();
 
-	bool show_demo_window = true;
-	bool show_another_window = false;
-	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
-
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))
 	{
+		glm::mat4 viewMatrix = glm::translate(glm::mat4(1.0f), viewTranslation);
+		mvp = projectionMatrix * viewMatrix * modelMatrix;
+
 		/* Shader Uniforms */
+		shader.SetUniformMat4f("u_ModelViewProjectionMatrix", mvp);
 		shader.SetUniform1f("u_Time", time);
 		time = time + (float)0.01;
 
@@ -125,28 +125,10 @@ int main(void)
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
 
-		{
-			static float f = 0.0f;
-			static int counter = 0;
-
-			ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
-
-			ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
-			ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
-			ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
-
-			if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
-				counter++;
-			ImGui::SameLine();
-			ImGui::Text("counter = %d", counter);
-
-			ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-			ImGui::End();
-		}
+		ImGui::SliderFloat2("Translation", &viewTranslation.x, 0.0f, (float)resolutionX);            // Edit 2 floats starting from memory address of viewTranslation.x
+		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 
 		ImGui::Render();
-		int display_w, display_h;
-		glfwGetFramebufferSize(window, &display_w, &display_h);
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
 		/* Swap front and back buffers */
