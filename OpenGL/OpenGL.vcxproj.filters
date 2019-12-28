@@ -60,6 +60,12 @@
     <ClCompile Include="src\vendor\imgui\imgui_impl_glfw.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="src\testScenes\TestScene_ClearColor.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\testScenes\TestScene_MovableImage.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\VertexBuffer.h">
@@ -837,6 +843,15 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="src\vendor\imgui\imgui_impl_glfw.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\testScenes\scene.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\testScenes\TestScene_ClearColor.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\testScenes\TestScene_MovableImage.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
