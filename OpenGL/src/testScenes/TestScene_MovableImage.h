@@ -41,6 +41,7 @@ namespace scene {
 		};
 
 		float time = 0;
+		int textureSlot = 0;
 
 		VertexBuffer vertexBuffer;
 		VertexBufferLayout layout;
@@ -51,6 +52,14 @@ namespace scene {
 
 		Renderer renderer;
 
+		/* Model View Projection matrices */
+		glm::vec3 viewTranslation = glm::vec3(500, 250, 0);
+		glm::mat4 projectionMatrix = glm::ortho(0.0f, (float)1920, 0.0f, (float)1080);
+		glm::mat4 viewMatrix = glm::translate(glm::mat4(1.0f), viewTranslation);
+		glm::mat4 modelMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
+
+		glm::mat4 mvp = projectionMatrix * viewMatrix * modelMatrix;
+
 	public:
 		TestScene_MovableImage();
 		~TestScene_MovableImage();
@@ -59,12 +68,5 @@ namespace scene {
 		void OnRender() override;
 		void OnImGuiRender() override;
 
-	private:
-		glm::vec3 viewTranslation = glm::vec3(500, 250, 0);
-		glm::mat4 projectionMatrix = glm::ortho(0.0f, (float)1920, 0.0f, (float)1080);
-		glm::mat4 viewMatrix = glm::translate(glm::mat4(1.0f), viewTranslation);
-		glm::mat4 modelMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
-
-		glm::mat4 mvp = projectionMatrix * viewMatrix * modelMatrix;
 	};
 }

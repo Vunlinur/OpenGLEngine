@@ -64,7 +64,7 @@ int main(void)
 	ImGui_ImplOpenGL3_Init(glsl_version);
 	ImGui::StyleColorsDark();
 
-	scene::TestScene_MovableImage scene;
+	scene::TestScene_ClearColor scene;
 
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))

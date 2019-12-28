@@ -8,23 +8,14 @@ namespace scene {
 		shader("resources/Shader.shader"),
 		texture("resources/dragonAlpha.png")
 	{
-		
-
-		/* Vertex buffer & Layout */
+		/* Vertex buffer, layout & array */
 		layout.Push<float>(2); // 1st and 2nd columns of POSITIONS: vertex coords
 		layout.Push<float>(2); // 3rd and 4th columns of POSITIONS: texture coords
 
-		/* Vertex array */
 		vertexArray.AddBuffer(vertexBuffer, layout);
-
-		/* Model View Projection matrices */
-		
 
 		/* Shaders */
 		shader.Bind();
-		float time = 0.0; // Uniform
-
-		int textureSlot = 0;
 		texture.Bind(textureSlot);
 		shader.SetUniform1i("u_Texture", textureSlot);
 	}
@@ -43,11 +34,11 @@ namespace scene {
 	{
 		glm::mat4 viewMatrix = glm::translate(glm::mat4(1.0f), viewTranslation);
 		mvp = projectionMatrix * viewMatrix * modelMatrix;
+		time = time + (float)0.01;
 
 		/* Shader Uniforms */
 		shader.SetUniformMat4f("u_ModelViewProjectionMatrix", mvp);
 		shader.SetUniform1f("u_Time", time);
-		time = time + (float)0.01;
 
 		renderer.Draw(vertexArray, indexBuffer, shader);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
