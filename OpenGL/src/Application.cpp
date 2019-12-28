@@ -47,10 +47,10 @@ int main(void)
 		std::cout << "[ERROR] GLEW init failed!" << std::endl;
 
 	float positions[] = {
-		-0.5, -0.5, 0.0, 0.0,//0
-		 0.5, -0.5, 1.0, 0.0,//1
-		 0.5,  0.5, 1.0, 1.0,//2
-		-0.5,  0.5, 0.0, 1.0//3
+		0.0, 0.0, 0.0, 0.0,//0
+		500, 0.0, 1.0, 0.0,//1
+		500, 500, 1.0, 1.0,//2
+		0.0, 500, 0.0, 1.0//3
 	};
 
 	unsigned int indices[] = {
@@ -70,9 +70,11 @@ int main(void)
 	vertexArray.AddBuffer(vertexBuffer, layout);
 	IndexBuffer indexBuffer(indices, 6);
 
-	float diagonal = sqrt(resolutionX * resolutionX + resolutionY * resolutionY);
-	diagonal /= 2;
-	glm::mat4 projectionMatrix = glm::ortho(-resolutionX / diagonal, resolutionX / diagonal, -resolutionY / diagonal, resolutionY / diagonal);
+	glm::mat4 projectionMatrix = glm::ortho( 0.0f, (float)resolutionX, 0.0f, (float)resolutionY);
+	glm::mat4 viewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(500, 250, 0));
+	glm::mat4 modelMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(500, 250, 0));
+
+	glm::mat4 mvp = projectionMatrix * viewMatrix * modelMatrix;
 	
 	Shader shader("resources/Shader.shader");
 	shader.Bind();
@@ -82,7 +84,7 @@ int main(void)
 	int textureSlot = 0;
 	texture.Bind(textureSlot);
 	shader.SetUniform1i("u_Texture", textureSlot);
-	shader.SetUniformMat4f("u_ModelViewProjectionMatrix", projectionMatrix);
+	shader.SetUniformMat4f("u_ModelViewProjectionMatrix", mvp);
 
 	Renderer renderer;
 
