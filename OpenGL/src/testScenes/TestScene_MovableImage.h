@@ -20,11 +20,11 @@
 #include "VertexArray.h"
 #include "Shader.h"
 #include "Texture.h"
-#include "testScenes/TestScene_ClearColor.h"
+#include "Scene.h"
 
 namespace scene {
 
-	class TestScene_MovableImage : public scene
+	class TestScene_MovableImage : public Scene
 	{
 	private:
 		/* Data to render */

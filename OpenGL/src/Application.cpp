@@ -64,7 +64,12 @@ int main(void)
 	ImGui_ImplOpenGL3_Init(glsl_version);
 	ImGui::StyleColorsDark();
 
-	scene::TestScene_ClearColor scene;
+	scene::Scene* CurrentScene = nullptr;
+	scene::SceneMenu* sceneMenu = new scene::SceneMenu(CurrentScene);
+	CurrentScene = sceneMenu;
+
+	sceneMenu->RegisterScene<scene::TestScene_ClearColor>("ClearColor");
+	sceneMenu->RegisterScene<scene::TestScene_MovableImage>("MovableImage");
 
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))
@@ -72,16 +77,25 @@ int main(void)
 		/* Render here */
 		renderer.Clear();
 
-		scene.OnTick(0.0f);
-		scene.OnRender();
-		
 		/* ImGui */
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
 
-		scene.OnImGuiRender();
+		if (CurrentScene)
+		{
+			CurrentScene->OnTick(0.0f);
+			CurrentScene->OnRender();
+			ImGui::Begin("Scene menu");
+			if (CurrentScene != sceneMenu && ImGui::Button("Back"))
+			{
+				delete CurrentScene;
+				CurrentScene = sceneMenu;
+			}
+			CurrentScene->OnImGuiRender();
+		}
 
+		ImGui::End();
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
@@ -91,6 +105,9 @@ int main(void)
 		/* Poll for and process events */
 		glfwPollEvents();
 	}
+	delete CurrentScene;
+	if (CurrentScene != sceneMenu)
+		delete sceneMenu;
 	
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplGlfw_Shutdown();

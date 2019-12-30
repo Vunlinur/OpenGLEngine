@@ -1,8 +1,5 @@
 #include "TestScene_ClearColor.h"
 
-#include "imgui/imgui.h"
-#include "renderer.h"
-
 namespace scene {
 
 	TestScene_ClearColor::TestScene_ClearColor()

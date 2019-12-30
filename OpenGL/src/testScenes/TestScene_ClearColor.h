@@ -1,9 +1,13 @@
 #pragma once
-#include "scene.h"
+
+#include "imgui/imgui.h"
+#include "renderer.h"
+
+#include "Scene.h"
 
 namespace scene {
 
-	class TestScene_ClearColor : public scene
+	class TestScene_ClearColor : public Scene
 	{
 	public:
 		TestScene_ClearColor();
