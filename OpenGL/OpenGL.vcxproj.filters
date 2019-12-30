@@ -69,6 +69,9 @@
     <ClCompile Include="src\testScenes\Scene.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="src\testScenes\TestScene_LiveShader.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\VertexBuffer.h">
@@ -857,6 +860,9 @@
     <ClInclude Include="src\testScenes\Scene.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="src\testScenes\TestScene_LiveShader.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\dragonAlpha.png">
@@ -864,7 +870,6 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <None Include="resources\Shader.shader" />
     <None Include="src\vendor\glm\detail\func_common.inl">
       <Filter>Headers</Filter>
     </None>
@@ -1267,5 +1272,7 @@
     <None Include="src\vendor\glm\gtx\wrap.inl">
       <Filter>Headers</Filter>
     </None>
+    <None Include="resources\Live.shader" />
+    <None Include="resources\Texture.shader" />
   </ItemGroup>
 </Project>

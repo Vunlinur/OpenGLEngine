@@ -165,6 +165,7 @@
     <ClCompile Include="src\vendor\stb_image\stb_image.cpp" />
     <ClCompile Include="src\Texture.cpp" />
     <ClCompile Include="src\testScenes\TestScene_ClearColor.cpp" />
+    <ClCompile Include="src\testScenes\TestScene_LiveShader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\testScenes\Scene.h" />
@@ -429,9 +430,11 @@
     <ClInclude Include="src\vendor\stb_image\stb_image.h" />
     <ClInclude Include="src\Texture.h" />
     <ClInclude Include="src\testScenes\TestScene_ClearColor.h" />
+    <ClInclude Include="src\testScenes\TestScene_LiveShader.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="resources\Shader.shader" />
+    <None Include="resources\Live.shader" />
+    <None Include="resources\Texture.shader" />
     <None Include="src\vendor\glm\detail\func_common.inl" />
     <None Include="src\vendor\glm\detail\func_common_simd.inl" />
     <None Include="src\vendor\glm\detail\func_exponential.inl" />

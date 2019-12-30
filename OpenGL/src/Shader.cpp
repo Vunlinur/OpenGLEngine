@@ -100,7 +100,7 @@ void Shader::Unbind() const
 	glCall(glUseProgram(0));
 }
 
-// Set unifroms
+// Set unifroms - should I template these?
 
 void Shader::SetUniform1i(const std::string& name, int i0)
 {
