@@ -22,6 +22,7 @@
 #include "testScenes/TestScene_ClearColor.h"
 #include "testScenes/TestScene_MovableImage.h"
 #include "testScenes/TestScene_LiveShader.h"
+#include "testScenes/TestScene_3DCube.h"
 
 int main(void)
 {
@@ -72,6 +73,7 @@ int main(void)
 	sceneMenu->RegisterScene<scene::TestScene_ClearColor>("ClearColor");
 	sceneMenu->RegisterScene<scene::TestScene_MovableImage>("MovableImage");
 	sceneMenu->RegisterScene<scene::TestScene_LiveShader>("LiveShader");
+	sceneMenu->RegisterScene<scene::TestScene_3DCube>("3DCube");
 
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))

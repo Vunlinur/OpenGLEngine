@@ -72,6 +72,9 @@
     <ClCompile Include="src\testScenes\TestScene_LiveShader.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="src\testScenes\TestScene_3DCube.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\VertexBuffer.h">
@@ -863,9 +866,15 @@
     <ClInclude Include="src\testScenes\TestScene_LiveShader.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="src\testScenes\TestScene_3DCube.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\dragonAlpha.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="resources\stoneTexture.jpg">
       <Filter>Resources</Filter>
     </Image>
   </ItemGroup>
@@ -1274,5 +1283,6 @@
     </None>
     <None Include="resources\Live.shader" />
     <None Include="resources\Texture.shader" />
+    <None Include="resources\3DCube.shader" />
   </ItemGroup>
 </Project>
