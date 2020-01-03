@@ -89,6 +89,5 @@ namespace scene {
 		void OnTick(float deltaTime) override;
 		void OnRender() override;
 		void OnImGuiRender() override;
-
 	};
 }
