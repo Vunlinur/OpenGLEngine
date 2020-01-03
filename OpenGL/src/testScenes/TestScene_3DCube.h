@@ -75,8 +75,8 @@ namespace scene {
 		/* Model View Projection matrices */
 		int mouseScroll;
 
-		//glm::mat4 projectionMatrix = glm::ortho(-1920.f / 2, 1920.f/2, -1080.f/2, 1080.f/2, 0.0f, 9999999.9f);
-		glm::mat4 projectionMatrix = glm::perspective(70.0, 1920.0/1080.0, 0.0, 10000.0); // why the hell 75 degree fov fucks up?
+		//glm::mat4 projectionMatrix = glm::ortho(-1920.f / 2, 1920.f/2, -1080.f/2, 1080.f/2, 0.1f, 10000.f);
+		glm::mat4 projectionMatrix = glm::perspective(70.0, 1920.0/1080.0, 0.1, 10000.0); // why the hell 75 degree fov fucks up?
 		glm::mat4 viewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(-1920/2, -1080/2, -1800));
 		glm::mat4 modelMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0, 0.0, 0.0));
 

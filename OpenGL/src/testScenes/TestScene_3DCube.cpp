@@ -8,7 +8,7 @@ namespace scene {
 		shader("resources/3DCube.shader")
 	{
 		glEnable(GL_CULL_FACE);
-		//glEnable(GL_DEPTH_TEST);
+		glEnable(GL_DEPTH_TEST);
 		glDepthFunc(GL_LESS);
 
 		/* Vertex buffer, layout & array */
